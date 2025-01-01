@@ -1,1 +1,2 @@
 
+This folder contains a collection of problems and solutions related to the Binary Search algorithm. Binary search is a fundamental algorithm used to find an element in a sorted array or to determine the position where an element should be inserted. It works by repeatedly dividing the search interval in half, reducing the search space logarithmically. This makes it an efficient solution for many problems, especially when dealing with large datasets.
