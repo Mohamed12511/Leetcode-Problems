@@ -1,0 +1,36 @@
+ // Problem: Find the k-th missing positive integer from the sorted array `arr`.
+    // Approach:
+    //          - The array `arr` contains positive integers, and the goal is to determine which positive integer 
+    //            is missing at the k-th position in the sequence of positive integers.
+    //          - Use binary search to efficiently find the k-th missing number by determining how many numbers are 
+    //            missing up to each point in the array.
+
+    // Time Complexity: O(log n), where n is the number of elements in the array `arr`. 
+    //                  Binary search is applied on the array, so the time complexity is logarithmic in terms of the array size.
+    // Space Complexity: O(1), as we are using only a few extra variables for the binary search.
+
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        int l = 0, r = arr.size() - 1;
+
+        // Handle cases where k-th missing number is before the first array element
+        if (k < arr[0]) {
+            return k;
+        }
+
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            int missing = arr[mid] - mid - 1;
+
+            if (missing < k) {
+                l = mid + 1; // Move right
+            } else {
+                r = mid - 1; // Move left
+            }
+        }
+
+        // l is the position where the k-th missing number lies
+        return l+k;
+    }
+};
