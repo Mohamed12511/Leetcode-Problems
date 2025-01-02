@@ -1,0 +1,42 @@
+// Problem: Find a special number `x` such that there are exactly `x` elements in the array `nums` that are greater than or equal to `x`.
+//
+// Approach:
+//          - First, sort the array to simplify counting elements greater than or equal to any value.
+//          - Use binary search to determine the potential "special number" `x`.
+//          - For each midpoint value in the binary search, count how many elements are greater than or equal to `mid`.
+//          - If the count equals `mid`, return `mid` as the result.
+//          - Otherwise, adjust the search range based on whether the count is greater or smaller than `mid`.
+//
+// Time Complexity: O(n log n), where n is the size of the array. Sorting takes O(n log n).
+//                  The binary search iterates O(log n) times, and counting elements takes O(n) for each iteration.
+// Space Complexity: O(1), as no additional space is used apart from variables.
+
+class Solution {
+public:
+    int specialArray(vector<int>& nums) {
+        sort(nums.begin(),nums.end());  
+
+        int size=nums.size()-1;  // size of vector
+
+        int maxnumber=nums[size];  // max number 
+
+        int left=0; int right=maxnumber;  
+
+        while(left<=right){
+            int count=0; // to count how many number>=mid in vector
+            int mid=(left+right)/2;
+
+        for(int start=0;start<=size;start++){  // traverse on all numbers in array
+            if(nums[start]>=mid) count++;
+        }
+
+        if(count==mid) return mid; // chek 
+
+        else if(count>mid)left=mid+1;  // we wanna a bigger number 
+
+        else right=mid-1; // we wanna a smaller number 
+        }
+        return -1;  
+
+    }
+};
