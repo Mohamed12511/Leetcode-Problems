@@ -1,0 +1,32 @@
+/**
+ * Problem: Find the Intersection of Two Arrays
+ *
+ * Task:
+ * - Return the unique intersection of two arrays as a vector.
+ *
+ * Approach:
+ * 1. Use two **unordered sets** for efficient lookups:
+ *    - Store all elements of `nums1` in `nums1Set`.
+ *    - Iterate through `nums2` and check if each element exists in `nums1Set`.
+ * 2. If an element from `nums2` exists in `nums1Set`, add it to `nums2Set` (to ensure uniqueness).
+ * 3. Convert the elements in `nums2Set` to a vector and return it.
+ *
+ * Complexity:
+ * - **Time**: O(N + M), where N and M are the sizes of `nums1` and `nums2`, for set operations.
+ * - **Space**: O(N + M), for storing the elements in sets.
+ */
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+      unordered_set<int> nums1Set(nums1.begin(), nums1.end());
+      unordered_set<int>nums2Set;
+
+    for(auto &it:nums2){
+        if(nums1Set.count(it))
+        nums2Set.insert(it);
+    }
+    return vector<int>(nums2Set.begin(),nums2Set.end());
+
+    }
+};
