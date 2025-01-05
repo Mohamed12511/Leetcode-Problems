@@ -1,0 +1,28 @@
+ * Problem: Find the First Bad Version
+ *
+ * Task:
+ * - You are given an API `isBadVersion(version)` that returns whether a version is bad.
+ * - You need to find the first bad version in a sequence of `n` versions (1 to n).
+
+* Complexity:
+ * - **Time Complexity**: O(log N)
+ *   - Binary search reduces the search space by half at each step.
+ * - **Space Complexity**: O(1)
+ *   - No additional space is used except for variables.
+ */
+
+class Solution {
+public:
+    int firstBadVersion(int n) {
+      long long l=1;  long long r=n;  long long  ans=-1;
+        while(l<=r){
+           long long mid=(l+r)/2;
+            if(isBadVersion(mid)==true){  
+                ans=mid;
+                r=mid-1;   // get the first true 
+            }
+            else l=mid+1;
+        }
+        return ans; 
+    }
+};
