@@ -1,0 +1,41 @@
+/**
+ * Problem: Find the Intersection of Two Arrays (including duplicates)
+ *
+ * Task:
+ * - Return the intersection of two arrays, including repeated elements.
+ *
+ * Approach:
+ * 1. Use an **unordered map** (`contain`) to store the frequency of elements in `nums1`.
+ * 2. Iterate through `nums2` and check if an element exists in the map with a positive count:
+ *    - If it exists, add it to the result vector and decrease its frequency in the map.
+ *    - If the frequency becomes zero, remove the element from the map.
+ * 3. Return the result vector containing the intersection elements.
+ *
+ * Complexity:
+ * - **Time**: O(N + M), where N and M are the sizes of `nums1` and `nums2`, due to map lookups and vector insertion.
+ * - **Space**: O(N), for storing the frequency of elements in `nums1`.
+ */
+
+
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+    unordered_map<int,int>contain;
+    for(auto &it:nums1){
+        contain[it]++; 
+    }
+    vector<int> Result;
+    for(auto &it:nums2){
+        if(contain[it]>0){
+         Result.push_back(it);
+         contain[it]--;
+        }
+        if(contain[it]==0){
+            contain.erase(it);
+        }
+    }
+    return Result;
+
+
+    }
+};
