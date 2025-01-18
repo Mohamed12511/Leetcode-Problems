@@ -1,0 +1,30 @@
+class Solution {
+public:
+int size=1e6*4;
+ vector<bool>primes;
+ void IsPrime(){
+      primes = vector<bool>(size, true);  
+  primes[0]=primes[1]=false;
+  for(int i=2;i*i<size;i++){
+    if(primes[i]){
+        for(int m=i*2;m<size;m+=i){
+            primes[m]=false;
+        }
+    }
+  }
+ }
+    int diagonalPrime(vector<vector<int>>& nums) {
+        int ans=INT_MIN;
+        int n=nums.size();
+        IsPrime();
+      for(int i=0;i<nums.size();i++){
+      for(int j=0;j<nums.size();j++){
+        if(j==i||j==n-i-1){
+            if(primes[nums[i][j]]&&nums[i][j]>ans)
+            ans=nums[i][j];
+        }
+      }
+      }
+        return (ans<0)?0:ans;
+    }
+};
