@@ -1,0 +1,16 @@
+class Solution {
+public:
+  
+    int commonFactors(int a, int b) {
+       int Largest=(a>b)?a:b;
+
+       int Smallest=(a<b)?a:b;
+
+       int count_Factors=1;
+       
+       for(int i=2;i<=Smallest;i++){
+        if(Smallest%i==0&&Largest%i==0)count_Factors++;
+       }
+       return count_Factors;
+    }
+};
