@@ -1,0 +1,33 @@
+class Solution {
+public:
+     int lcm(int a,int b){
+        return a*(b/gcd(a,b));
+     }
+    int maxLength(vector<int>& nums) {
+        int size=nums.size();
+        int max_length=0;
+
+       
+        for(int i=0;i<size;i++){
+        int g=nums[i];
+        int l=nums[i];
+        long long pro=1;
+      
+       for(int j=i;j<size;j++){
+         if (pro > LLONG_MAX / nums[j]) {
+                    break; // Exit the loop if overflow would occur
+                }
+         pro*=nums[j];
+       g=gcd(g,nums[j]);
+       l=lcm(l,nums[j]);
+      
+       
+       if(pro==g*l)
+       max_length=max(max_length,j-i+1);
+
+       }
+        }
+        return max_length;
+    }
+
+};
