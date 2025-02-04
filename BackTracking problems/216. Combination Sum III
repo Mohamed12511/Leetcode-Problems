@@ -1,0 +1,25 @@
+class Solution {
+    void Permu(vector<vector<int>>&ret,int &n,int k,vector<int>&part,int index,int target){
+         if(k==0){
+             if(target==0)
+            ret.push_back(part);
+            return;
+         }
+         for(int i=index;i<=9;i++){
+            if(target<i)continue;
+             part.push_back(i);
+             Permu(ret,n,k-1,part,i+1,target-i);
+             part.pop_back();
+         }
+    }
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>>ret;
+        vector<int>part;
+      
+          int index=1;
+     Permu(ret,n,k,part,index,n);
+           
+        return ret;
+    }
+};
