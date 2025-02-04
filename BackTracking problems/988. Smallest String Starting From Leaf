@@ -1,0 +1,39 @@
+// Problem: Find the lexicographically smallest string starting from any leaf to the root in a binary tree.
+// Approach:
+//          - Use DFS (Depth-First Search) to traverse the tree.
+//          - Convert node values to corresponding lowercase letters ('a' + val).
+//          - Construct a path string in a bottom-up manner (from leaf to root).
+//          - Store the lexicographically smallest path found.
+// Time Complexity: O(n), where n is the number of nodes in the tree.
+//                  Each node is visited once.
+// Space Complexity: O(h), where h is the height of the tree (due to recursion stack).
+
+#include <string>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    string smallestPath = "";  // Stores the lexicographically smallest path
+
+    void findSmallestPath(TreeNode* root, string currentPath) {
+        if (root == nullptr) return;
+
+        currentPath += ('a' + root->val);  // Convert value to character
+
+        if (!root->left && !root->right) { // If it's a leaf node
+            reverse(currentPath.begin(), currentPath.end()); // Reverse to get leaf-to-root order
+            
+            if (smallestPath.empty() || currentPath < smallestPath) 
+                smallestPath = currentPath;
+        }
+
+        findSmallestPath(root->left, currentPath);
+        findSmallestPath(root->right, currentPath);
+    }
+
+    string smallestFromLeaf(TreeNode* root) {
+        findSmallestPath(root, "");
+        return smallestPath;
+    }
+};
