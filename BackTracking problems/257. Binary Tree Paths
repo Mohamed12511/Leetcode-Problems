@@ -1,0 +1,37 @@
+// Problem: Find all root-to-leaf paths in a binary tree and return them as a list of strings.
+// Approach:
+//          - Use recursive DFS to traverse the tree.
+//          - Append each node's value to a string representing the path.
+//          - When a leaf node is reached, store the path in a vector.
+// Time Complexity: O(n), where n is the number of nodes in the tree.
+//                  Each node is visited once.
+// Space Complexity: O(n), for storing paths in the vector.
+
+#include <string>
+#include <vector>
+using namespace std;
+
+class Solution {
+public: 
+    void generatePaths(TreeNode* root, vector<string>& paths, string currentPath) {
+        if (root == nullptr) return;
+        
+        currentPath += to_string(root->val);
+        
+        if (!root->left && !root->right) { // If it's a leaf node, store the path
+            paths.push_back(currentPath);
+            return;
+        }
+        
+        currentPath += "->"; // Append arrow before exploring children
+        
+        generatePaths(root->left, paths, currentPath);
+        generatePaths(root->right, paths, currentPath);
+    }
+
+    vector<string> binaryTreePaths(TreeNode* root) { 
+        vector<string> paths;
+        generatePaths(root, paths, "");
+        return paths;
+    }
+};
