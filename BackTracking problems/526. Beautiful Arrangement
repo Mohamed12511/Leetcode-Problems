@@ -1,0 +1,39 @@
+// Problem: Count the number of valid permutations where 
+//          for each position i (1-based index), either:
+//          - i is divisible by the element at that position
+//          - The element at that position is divisible by i
+// Approach:
+//          - Use backtracking with a boolean array to track used numbers.
+//          - Try placing each number from 1 to n at position `pos`.
+// Time Complexity: O(n!) in the worst case (as we explore all permutations).
+// Space Complexity: O(n) for the `used` array and recursion stack.
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    void countValidPermutations(int n, int &arrangementCount, int pos, vector<bool>& used) {
+        if (pos > n) {  // If we filled all positions, count this valid permutation
+            arrangementCount++;
+            return;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if (!used[i] && (pos % i == 0 || i % pos == 0)) {
+                used[i] = true;
+                countValidPermutations(n, arrangementCount, pos + 1, used);
+                used[i] = false; // Backtrack
+            }
+        }
+    }
+
+    int countArrangement(int n) {
+        int arrangementCount = 0;
+        vector<bool> used(n + 1, false);  // Track used numbers
+
+        countValidPermutations(n, arrangementCount, 1, used);
+
+        return arrangementCount;
+    }
+};
