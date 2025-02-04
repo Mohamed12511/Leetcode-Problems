@@ -1,0 +1,23 @@
+class Solution {
+      void Permu(vector<vector<int>>&ret,int n,int k,int index,vector<int>part){
+        if(k==0){
+         ret.push_back(part);
+         return;
+        }
+        for(int i=index;i<=n;i++){
+            part.push_back(i);
+            Permu(ret,n,k-1,i+1,part);
+            part.pop_back();
+        }
+      }
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>>ret;
+
+        
+         Permu(ret,n,k,1,{});
+        
+
+        return ret;
+    }
+};
