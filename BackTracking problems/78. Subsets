@@ -1,0 +1,23 @@
+class Solution {
+     void helper(vector<vector<int>>&ret,vector<int>nums,int index,vector<int>part){
+        if(index==nums.size()){
+            ret.push_back(part);
+            return ;
+        }
+
+        helper(ret,nums,index+1,part);
+        part.push_back(nums[index]);
+        helper(ret,nums,index+1,part);
+        part.pop_back();
+     }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>>ret;
+
+          helper(ret,nums,0,{});
+
+
+        return ret;
+
+    }
+};
