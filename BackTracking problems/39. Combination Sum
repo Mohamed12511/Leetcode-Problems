@@ -1,0 +1,28 @@
+class Solution {
+
+     void Permu(vector<vector<int>>&ret,vector<int>&nums,int target,int index,vector<int>part){
+         if(nums.size()==index){
+            if(target==0){
+                ret.push_back(part);
+            }
+                 return ;
+            }
+            
+      
+    if(nums[index]<=target){
+            part.push_back(nums[index]);
+            Permu(ret,nums,target-nums[index],index,part);
+            part.pop_back();
+        }
+        Permu(ret,nums,target,index+1,part);
+
+     }
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>>ret;
+
+        Permu(ret,candidates,target,0,{});
+
+        return ret; 
+    }
+};
